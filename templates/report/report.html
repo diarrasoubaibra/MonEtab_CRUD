@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Liste des professeurs{% endblock %}
+
+{% block rapport_active %}active{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Impression Rapport</h1>
+
+    <div class="card p-4">
+        <div class="mb-3">
+            <label for="classe" class="form-label">Sélectionner une classe</label>
+            <select id="classe" name="classe" class="form-select">
+                <option value="6eme">6ème</option>
+                <option value="5eme">5ème</option>
+                <option value="4eme">4ème</option>
+                <option value="3eme">3ème</option>
+                <option value="2nde">2nde</option>
+                <option value="1ere">1ère</option>
+                <option value="terminale">Terminale</option>
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-primary" onclick="confirmCancel()">Générer format PDF</button>
+            <button class="btn btn-success">Générer format Excel</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/script.js' %}"></script>
+{% block confirmation_js %}
+<script src="{% static 'js/supprimer.js' %}"></script>
+{% endblock %}
+{% endblock %}

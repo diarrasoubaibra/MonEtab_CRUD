@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block student_active %}active{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center ">
+    <h1 class="text-dark">Tableau de bord</h1>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card text-center bg-primary text-light p-3">
+            <div class="card-body">
+                <h5 class="card-title">Nombre d'élèves</h5>
+                <p class="card-text fs-3">128 100</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-center bg-success text-light p-3">
+            <div class="card-body">
+                <h5 class="card-title">Nombre de professeurs</h5>
+                <p class="card-text fs-3">128 100</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-center bg-warning text-light p-3">
+            <div class="card-body">
+                <h5 class="card-title">Nombre d'utilisateurs</h5>
+                <p class="card-text fs-3">128 100</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card p-3">
+            <div class="card-body">
+                <canvas id="pie-chart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/script.js' %}"></script>
+{% block confirmation_js %}
+<script src="{% static 'js/supprimer.js' %}"></script>
+{% endblock %}
+{% endblock %}

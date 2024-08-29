@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Liste des professeurs{% endblock %}
+
+{% block professeur_active %}active{% endblock %}
+
+{% block content %}
+<div class="content1">
+    <div class="back-button mb-3">
+        <h1 style="color:black;">Liste des professeurs</h1>
+        <a href="{% url 'teacher:add_teacher' %}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Nouveau professeur</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Matière</th>
+                <th>Vacant</th>
+                <th>Age</th>
+                <th>Téléphone</th>
+                <th>Ville</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher in teachers %}
+            <tr>
+                <td>{{teacher.last_name}}</td>
+                <td>{{teacher.first_name}}</td>
+                <td>{{teacher.matiere}}</td>
+                <td>{{teacher.vacant}}</td>
+                <td>35</td> <!-- Remplacez "35" par "{{ teacher.age }}" si l'âge est dans la base -->
+                <td>{{teacher.phone_number}}</td>
+                <td>{{teacher.city}}</td>
+                <td>
+                    <a href="{% url 'teacher:edit_teacher' teacher.id %}" class="btn btn-warning">Modifier</a>
+                    <!-- Bouton pour ouvrir le modal -->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ teacher.id }}">
+                        Supprimer
+                    </button>
+                    
+                    <!-- Modal Bootstrap -->
+                    <div class="modal fade" id="deleteModal{{ teacher.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ teacher.id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel{{ teacher.id }}">Confirmer la suppression</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Êtes-vous sûr de vouloir supprimer ce professeur ? Cette action est irréversible.
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="{% url 'teacher:delete' teacher.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+

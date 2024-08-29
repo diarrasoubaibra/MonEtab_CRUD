@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block eleve_active %}active{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-end mb-4">
+        <a href="{% url 'student:list' %}" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Retour</a>
+    </div>
+
+    <div class="card p-4">
+        <h1 class="text-center mb-4">Modifier un élève</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form action="" method="post" novalidate>
+                    {% csrf_token %}
+                    {{ students|crispy }} 
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'student:list' %}" class="btn btn-outline-secondary">Annuler</a>
+                        <button type="submit" class="btn btn-primary">Soumettre</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
